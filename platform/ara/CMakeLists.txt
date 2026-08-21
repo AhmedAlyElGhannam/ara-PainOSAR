@@ -2,3 +2,4 @@
 # module's own directory -- nothing else in the build needs to know.
 add_subdirectory(sensor)
 add_subdirectory(log)
+add_subdirectory(heartbeat)

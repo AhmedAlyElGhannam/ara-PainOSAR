@@ -1,0 +1,22 @@
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
+
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "heartbeat",
+    srcs = ["src/heartbeat_monitor.cpp"],
+    hdrs = ["include/ara/heartbeat/heartbeat_monitor.h"],
+    # Adds -Iplatform/ara/heartbeat/include, so the include directive mirrors
+    # the namespace: #include "ara/heartbeat/heartbeat_monitor.h"
+    includes = ["include"],
+)
+
+cc_test(
+    name = "heartbeat_tests",
+    size = "small",
+    srcs = ["test/test_heartbeat_monitor.cpp"],
+    deps = [
+        ":heartbeat",
+        "@googletest//:gtest_main",
+    ],
+)
