@@ -1,0 +1,56 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+Standard: c++20
+
+# --- Rule 1: indentation is always 4 spaces, never tabs ------------------
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ContinuationIndentWidth: 4
+ConstructorInitializerIndentWidth: 4
+AccessModifierOffset: -4
+NamespaceIndentation: All
+IndentCaseLabels: true
+IndentPPDirectives: None
+# DontAlign is load-bearing: bracket alignment would produce continuation
+# lines indented to arbitrary columns, breaking the multiple-of-4 rule.
+AlignAfterOpenBracket: DontAlign
+AlignOperands: DontAlign
+AlignEscapedNewlines: Left
+BitFieldColonSpacing: Both
+
+# --- Rule 4: opening brace always starts on its own line -----------------
+BreakBeforeBraces: Allman
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: None
+AllowShortLoopsOnASingleLine: false
+BreakBeforeBinaryOperators: None
+BreakConstructorInitializers: BeforeColon
+
+# --- Rule 5: never more than two blank lines in a row --------------------
+MaxEmptyLinesToKeep: 2
+KeepEmptyLinesAtTheStartOfBlocks: false
+SeparateDefinitionBlocks: Leave
+
+# --- Rule 3: every file ends with exactly one newline --------------------
+InsertNewlineAtEOF: true
+KeepEmptyLinesAtEOF: false
+
+# --- General -------------------------------------------------------------
+ColumnLimit: 100
+PointerAlignment: Left
+ReferenceAlignment: Left
+DerivePointerAlignment: false
+SortIncludes: CaseSensitive
+IncludeBlocks: Regroup
+SpaceBeforeParens: ControlStatements
+SpacesBeforeTrailingComments: 1
+FixNamespaceComments: true
+EmptyLineBeforeAccessModifier: LogicalBlock
+InsertBraces: true
+RemoveSemicolon: false

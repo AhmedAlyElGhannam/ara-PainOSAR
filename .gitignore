@@ -1,0 +1,17 @@
+/build/
+/out/
+cmake-build-*/
+/bazel-*
+/.bazelbuild/
+*.xml
+!.clang-format
+.pytest_cache/
+__pycache__/
+*.py[cod]
+.coverage
+.vscode/
+.idea/
+*.swp
+.DS_Store
+.claude/
+compile_commands.json

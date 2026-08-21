@@ -1,0 +1,23 @@
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
+
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "log",
+    srcs = ["src/log_formatter.cpp"],
+    hdrs = ["include/ara/log/log_formatter.h"],
+    includes = ["include"],
+    # log_formatter.h includes sensor_reader.h, so the dependency is part of
+    # this library's public interface, not an implementation detail.
+    deps = ["//platform/ara/sensor"],
+)
+
+cc_test(
+    name = "log_tests",
+    size = "small",
+    srcs = ["test/test_log_formatter.cpp"],
+    deps = [
+        ":log",
+        "@googletest//:gtest_main",
+    ],
+)

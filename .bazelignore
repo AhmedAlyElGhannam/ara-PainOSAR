@@ -1,0 +1,7 @@
+# Keep `bazel ... //...` out of trees Bazel does not own. The CMake build tree
+# under build/ contains FetchContent's GoogleTest checkout, whose own BUILD
+# files reference repositories this module never declares (@rules_python); left
+# unignored, `bazel build //...` fails to load packages the moment a CMake
+# build has run. build-cmake.sh and build-bazel.sh share one workspace, so this
+# is the normal case, not an edge case.
+build

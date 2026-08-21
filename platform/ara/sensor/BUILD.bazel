@@ -1,0 +1,22 @@
+load("@rules_cc//cc:defs.bzl", "cc_library", "cc_test")
+
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "sensor",
+    srcs = ["src/sensor_reader.cpp"],
+    hdrs = ["include/ara/sensor/sensor_reader.h"],
+    # Adds -Iplatform/ara/sensor/include, so the include directive mirrors the
+    # namespace: #include "ara/sensor/sensor_reader.h"
+    includes = ["include"],
+)
+
+cc_test(
+    name = "sensor_tests",
+    size = "small",
+    srcs = ["test/test_sensor_reader.cpp"],
+    deps = [
+        ":sensor",
+        "@googletest//:gtest_main",
+    ],
+)

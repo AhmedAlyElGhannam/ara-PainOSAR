@@ -1,0 +1,2 @@
+# Targets live in platform/. This file exists so the repository root is a
+# valid Bazel package; `bazel build //...` walks down from here.

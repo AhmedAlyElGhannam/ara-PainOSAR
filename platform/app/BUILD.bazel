@@ -1,0 +1,11 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+
+cc_binary(
+    name = "telemetry_cli",
+    srcs = ["src/main.cpp"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//platform/ara/log",
+        "//platform/ara/sensor",
+    ],
+)
