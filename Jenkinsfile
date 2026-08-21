@@ -3,8 +3,13 @@
 // This file is deliberately thin. Every stage is one line calling a script in
 // ci/, because a script can be run on a laptop in two seconds and a Jenkins
 // stage can only be run by pushing a commit and waiting. When a build fails at
-// 11pm you want `docker run <image> ci/build-cmake.sh`, not eight debug
+// 11pm you want `docker run <image> bash ci/build-cmake.sh`, not eight debug
 // commits.
+//
+// Scripts are invoked as `bash ci/<name>.sh` rather than `ci/<name>.sh`. The
+// explicit interpreter does not require the file to carry its executable bit,
+// so a lost mode -- a zip download, a checkout on a filesystem that drops
+// permissions, a forgotten chmod -- cannot break the pipeline with exit 126.
 //
 // Stage order is fail-fast: cheapest and most certain first.
 
@@ -85,7 +90,7 @@ pipeline
             // worse than no checker, and this is what catches it.
             steps
             {
-                sh 'ci/test-checks.sh'
+                sh 'bash ci/test-checks.sh'
             }
         }
 
@@ -95,7 +100,7 @@ pipeline
             // mandated flag set. Nothing forces them to agree; this does.
             steps
             {
-                sh 'ci/check-flags.sh'
+                sh 'bash ci/check-flags.sh'
             }
         }
 
@@ -103,7 +108,7 @@ pipeline
         {
             steps
             {
-                sh 'ci/check-format.sh'
+                sh 'bash ci/check-format.sh'
             }
         }
 
@@ -117,14 +122,14 @@ pipeline
                 {
                     steps
                     {
-                        sh 'ci/build-cmake.sh'
+                        sh 'bash ci/build-cmake.sh'
                     }
                 }
                 stage('Bazel')
                 {
                     steps
                     {
-                        sh 'ci/build-bazel.sh'
+                        sh 'bash ci/build-bazel.sh'
                     }
                 }
             }
@@ -134,7 +139,7 @@ pipeline
         {
             steps
             {
-                sh 'ci/test-unit.sh'
+                sh 'bash ci/test-unit.sh'
             }
         }
 
@@ -144,7 +149,7 @@ pipeline
             // a branch that failed to compile.
             steps
             {
-                sh 'ci/test-integration.sh'
+                sh 'bash ci/test-integration.sh'
             }
         }
     }
@@ -179,3 +184,4 @@ pipeline
         }
     }
 }
+
